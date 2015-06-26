@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Wed Jun 24 23:01:00 2015
-#      by: PyQt4 UI code generator 4.11.2
+# Created: Fri Jun 26 16:28:34 2015
+#      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -26,18 +26,15 @@ except AttributeError:
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(792, 500)
-        MainWindow.setMinimumSize(QtCore.QSize(400, 500))
+        MainWindow.resize(650, 513)
+        MainWindow.setMinimumSize(QtCore.QSize(650, 500))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.gridLayout = QtGui.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.label_appid = QtGui.QLabel(self.centralwidget)
-        self.label_appid.setObjectName(_fromUtf8("label_appid"))
-        self.gridLayout.addWidget(self.label_appid, 0, 0, 1, 1)
-        self.lineEdit_appsecret = QtGui.QLineEdit(self.centralwidget)
-        self.lineEdit_appsecret.setObjectName(_fromUtf8("lineEdit_appsecret"))
-        self.gridLayout.addWidget(self.lineEdit_appsecret, 1, 1, 1, 2)
+        self.lineEdit_secret = QtGui.QLineEdit(self.centralwidget)
+        self.lineEdit_secret.setObjectName(_fromUtf8("lineEdit_secret"))
+        self.gridLayout.addWidget(self.lineEdit_secret, 1, 1, 1, 5)
         self.pushButton_connect = QtGui.QPushButton(self.centralwidget)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
@@ -45,7 +42,31 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.pushButton_connect.sizePolicy().hasHeightForWidth())
         self.pushButton_connect.setSizePolicy(sizePolicy)
         self.pushButton_connect.setObjectName(_fromUtf8("pushButton_connect"))
-        self.gridLayout.addWidget(self.pushButton_connect, 0, 3, 2, 1)
+        self.gridLayout.addWidget(self.pushButton_connect, 0, 6, 2, 1)
+        self.label_appid = QtGui.QLabel(self.centralwidget)
+        self.label_appid.setObjectName(_fromUtf8("label_appid"))
+        self.gridLayout.addWidget(self.label_appid, 0, 0, 1, 1)
+        self.pushButton_dump_all_user = QtGui.QPushButton(self.centralwidget)
+        self.pushButton_dump_all_user.setObjectName(_fromUtf8("pushButton_dump_all_user"))
+        self.gridLayout.addWidget(self.pushButton_dump_all_user, 7, 0, 1, 7)
+        self.label_secret = QtGui.QLabel(self.centralwidget)
+        self.label_secret.setObjectName(_fromUtf8("label_secret"))
+        self.gridLayout.addWidget(self.label_secret, 1, 0, 1, 1)
+        self.pushButton_get_openids = QtGui.QPushButton(self.centralwidget)
+        self.pushButton_get_openids.setObjectName(_fromUtf8("pushButton_get_openids"))
+        self.gridLayout.addWidget(self.pushButton_get_openids, 3, 0, 1, 2)
+        self.lineEdit_appid = QtGui.QLineEdit(self.centralwidget)
+        self.lineEdit_appid.setObjectName(_fromUtf8("lineEdit_appid"))
+        self.gridLayout.addWidget(self.lineEdit_appid, 0, 1, 1, 5)
+        self.progressBar = QtGui.QProgressBar(self.centralwidget)
+        self.progressBar.setProperty("value", 24)
+        self.progressBar.setObjectName(_fromUtf8("progressBar"))
+        self.gridLayout.addWidget(self.progressBar, 3, 3, 1, 1)
+        self.line = QtGui.QFrame(self.centralwidget)
+        self.line.setFrameShape(QtGui.QFrame.HLine)
+        self.line.setFrameShadow(QtGui.QFrame.Sunken)
+        self.line.setObjectName(_fromUtf8("line"))
+        self.gridLayout.addWidget(self.line, 2, 0, 1, 7)
         self.tableWidget = QtGui.QTableWidget(self.centralwidget)
         self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
         self.tableWidget.setColumnCount(0)
@@ -72,19 +93,33 @@ class Ui_MainWindow(object):
         self.tableWidget.setVerticalHeaderItem(9, item)
         item = QtGui.QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(10, item)
-        self.gridLayout.addWidget(self.tableWidget, 4, 2, 2, 1)
-        self.lineEdit_appid = QtGui.QLineEdit(self.centralwidget)
-        self.lineEdit_appid.setObjectName(_fromUtf8("lineEdit_appid"))
-        self.gridLayout.addWidget(self.lineEdit_appid, 0, 1, 1, 2)
+        self.gridLayout.addWidget(self.tableWidget, 5, 2, 2, 5)
         self.listWidget = QtGui.QListWidget(self.centralwidget)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.listWidget.sizePolicy().hasHeightForWidth())
+        self.listWidget.setSizePolicy(sizePolicy)
+        self.listWidget.setMinimumSize(QtCore.QSize(256, 0))
         self.listWidget.setObjectName(_fromUtf8("listWidget"))
-        self.gridLayout.addWidget(self.listWidget, 4, 0, 2, 2)
-        self.label_appsecret = QtGui.QLabel(self.centralwidget)
-        self.label_appsecret.setObjectName(_fromUtf8("label_appsecret"))
-        self.gridLayout.addWidget(self.label_appsecret, 1, 0, 1, 1)
-        self.pushButton_show_users = QtGui.QPushButton(self.centralwidget)
-        self.pushButton_show_users.setObjectName(_fromUtf8("pushButton_show_users"))
-        self.gridLayout.addWidget(self.pushButton_show_users, 2, 0, 1, 2)
+        self.gridLayout.addWidget(self.listWidget, 5, 0, 2, 2)
+        self.lcdNumber_loadedUsers = QtGui.QLCDNumber(self.centralwidget)
+        self.lcdNumber_loadedUsers.setStyleSheet(_fromUtf8("QLCDNumber{\n"
+"    color: rgb(100, 200, 0);    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"}"))
+        self.lcdNumber_loadedUsers.setObjectName(_fromUtf8("lcdNumber_loadedUsers"))
+        self.gridLayout.addWidget(self.lcdNumber_loadedUsers, 3, 2, 1, 1)
+        self.label = QtGui.QLabel(self.centralwidget)
+        self.label.setObjectName(_fromUtf8("label"))
+        self.gridLayout.addWidget(self.label, 3, 4, 1, 1, QtCore.Qt.AlignRight)
+        self.lcdNumber_totalUsers = QtGui.QLCDNumber(self.centralwidget)
+        self.lcdNumber_totalUsers.setStyleSheet(_fromUtf8("QLCDNumber{\n"
+"    color: rgb(100, 200, 0);    \n"
+"    background-color: rgb(50, 50, 50);\n"
+"}"))
+        self.lcdNumber_totalUsers.setObjectName(_fromUtf8("lcdNumber_totalUsers"))
+        self.gridLayout.addWidget(self.lcdNumber_totalUsers, 3, 6, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
@@ -95,8 +130,11 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
-        self.label_appid.setText(_translate("MainWindow", "appid", None))
         self.pushButton_connect.setText(_translate("MainWindow", "Connect", None))
+        self.label_appid.setText(_translate("MainWindow", "appid", None))
+        self.pushButton_dump_all_user.setText(_translate("MainWindow", "Dump all user information", None))
+        self.label_secret.setText(_translate("MainWindow", "secret", None))
+        self.pushButton_get_openids.setText(_translate("MainWindow", "Get Openids", None))
         item = self.tableWidget.verticalHeaderItem(0)
         item.setText(_translate("MainWindow", "subscribe", None))
         item = self.tableWidget.verticalHeaderItem(1)
@@ -119,6 +157,5 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "subscribe_time", None))
         item = self.tableWidget.verticalHeaderItem(10)
         item.setText(_translate("MainWindow", "groupid", None))
-        self.label_appsecret.setText(_translate("MainWindow", "appsecret", None))
-        self.pushButton_show_users.setText(_translate("MainWindow", "Show Users", None))
+        self.label.setText(_translate("MainWindow", "of total users", None))
 
