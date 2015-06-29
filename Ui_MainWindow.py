@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Fri Jun 26 16:28:34 2015
+# Created: Mon Jun 29 14:26:50 2015
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,8 +26,8 @@ except AttributeError:
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(650, 513)
-        MainWindow.setMinimumSize(QtCore.QSize(650, 500))
+        MainWindow.resize(650, 560)
+        MainWindow.setMinimumSize(QtCore.QSize(650, 560))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.gridLayout = QtGui.QGridLayout(self.centralwidget)
@@ -68,9 +68,10 @@ class Ui_MainWindow(object):
         self.line.setObjectName(_fromUtf8("line"))
         self.gridLayout.addWidget(self.line, 2, 0, 1, 7)
         self.tableWidget = QtGui.QTableWidget(self.centralwidget)
+        self.tableWidget.setMinimumSize(QtCore.QSize(0, 384))
         self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
-        self.tableWidget.setColumnCount(0)
-        self.tableWidget.setRowCount(11)
+        self.tableWidget.setColumnCount(1)
+        self.tableWidget.setRowCount(12)
         item = QtGui.QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
@@ -93,6 +94,14 @@ class Ui_MainWindow(object):
         self.tableWidget.setVerticalHeaderItem(9, item)
         item = QtGui.QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(10, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(11, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(0, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setItem(0, 0, item)
+        self.tableWidget.horizontalHeader().setVisible(True)
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
         self.gridLayout.addWidget(self.tableWidget, 5, 2, 2, 5)
         self.listWidget = QtGui.QListWidget(self.centralwidget)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Expanding)
@@ -100,7 +109,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.listWidget.sizePolicy().hasHeightForWidth())
         self.listWidget.setSizePolicy(sizePolicy)
-        self.listWidget.setMinimumSize(QtCore.QSize(256, 0))
+        self.listWidget.setMinimumSize(QtCore.QSize(256, 384))
         self.listWidget.setObjectName(_fromUtf8("listWidget"))
         self.gridLayout.addWidget(self.listWidget, 5, 0, 2, 2)
         self.lcdNumber_loadedUsers = QtGui.QLCDNumber(self.centralwidget)
@@ -156,6 +165,13 @@ class Ui_MainWindow(object):
         item = self.tableWidget.verticalHeaderItem(9)
         item.setText(_translate("MainWindow", "subscribe_time", None))
         item = self.tableWidget.verticalHeaderItem(10)
+        item.setText(_translate("MainWindow", "remark", None))
+        item = self.tableWidget.verticalHeaderItem(11)
         item.setText(_translate("MainWindow", "groupid", None))
+        item = self.tableWidget.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "User Information", None))
+        __sortingEnabled = self.tableWidget.isSortingEnabled()
+        self.tableWidget.setSortingEnabled(False)
+        self.tableWidget.setSortingEnabled(__sortingEnabled)
         self.label.setText(_translate("MainWindow", "of total users", None))
 

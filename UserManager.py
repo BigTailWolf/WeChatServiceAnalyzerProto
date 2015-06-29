@@ -6,20 +6,19 @@ from PyQt4.QtCore import QObject, pyqtSignal
 
 class User(object):
 
-    def __init__(self, jstr):
-        jobj = json.load(jstr)
-        self.subscribe      = jobj['subscribe']
-        self.openid         = jobj['openid']
-        self.nickname       = jobj['nickname']
-        self.sex            = jobj['sex']
-        self.language       = jobj['language']
-        self.city           = jobj['city']
-        self.province       = jobj['province']
-        self.country        = jobj['country']
-        self.headimgurl     = jobj['headimgurl']
-        self.subscribe_time = jobj['subscribe_time']
-        self.remark         = jobj['remark']
-        self.groupid        = jobj['groupid']
+    def __init__(self, jobj):
+        self.subscribe      = jobj[u'subscribe']
+        self.openid         = jobj[u'openid']
+        self.nickname       = jobj[u'nickname']
+        self.sex            = jobj[u'sex']
+        self.language       = jobj[u'language']
+        self.city           = jobj[u'city']
+        self.province       = jobj[u'province']
+        self.country        = jobj[u'country']
+        self.headimgurl     = jobj[u'headimgurl']
+        self.subscribe_time = jobj[u'subscribe_time']
+        self.remark         = jobj[u'remark']
+        self.groupid        = jobj[u'groupid']
 
 
 class UserManager(QObject):
@@ -27,6 +26,9 @@ class UserManager(QObject):
     connected = pyqtSignal(str)
     openidGot = pyqtSignal(str)
     error     = pyqtSignal(str)
+    info      = pyqtSignal(str)
+    onUser    = pyqtSignal(User)
+    progress  = pyqtSignal(int, float)
 
     def __init__(self):
         QObject.__init__(self)
@@ -63,7 +65,6 @@ class UserManager(QObject):
                 content = json.loads(r.content)
                 if content.has_key('data'):
                     self.openids = content['data']['openid']
-                    print self.openids
                     self.openidGot.emit('Pull openids successfully')
                     
             else:
@@ -73,6 +74,28 @@ class UserManager(QObject):
         except:
             self.error.emit('Unhandling error in show users')
 
+
     def get_user(self, openid):
-        print 'Pulling information of %s' %(openid)
+        
+        if openid not in self.users:
+            url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=%s&openid=%s' %(self.access_token, openid)
+            msg = 'loading user %s' %(openid)
+            self.info.emit(msg)
+            try:
+                r = requests.get(url)
+                if r.status_code == 200:
+                    jobj = json.loads(r.content)
+                    if jobj.has_key('openid'):
+                        self.users[openid] = User(jobj)
+                    else:
+                        errmsg = 'User information error'
+                        self.error.emit(errmsg)
+                else:
+                    errmsg = 'Connection error with code %i' %(r.status_code)
+                    self.error.emit(errmsg)
+            except:
+                self.error.emit('Unhandling error in load user info')
+
+        self.onUser.emit(self.users[openid])
+
 
