@@ -2,6 +2,7 @@
 
 import json
 import requests
+import threading
 from PyQt4.QtCore import QObject, pyqtSignal
 
 class User(object):
@@ -28,7 +29,7 @@ class UserManager(QObject):
     error     = pyqtSignal(str)
     info      = pyqtSignal(str)
     onUser    = pyqtSignal(User)
-    progress  = pyqtSignal(int, float)
+    progress  = pyqtSignal(int, int)
 
     def __init__(self):
         QObject.__init__(self)
@@ -78,24 +79,36 @@ class UserManager(QObject):
     def get_user(self, openid):
         
         if openid not in self.users:
-            url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=%s&openid=%s' %(self.access_token, openid)
-            msg = 'loading user %s' %(openid)
-            self.info.emit(msg)
-            try:
-                r = requests.get(url)
-                if r.status_code == 200:
-                    jobj = json.loads(r.content)
-                    if jobj.has_key('openid'):
-                        self.users[openid] = User(jobj)
-                    else:
-                        errmsg = 'User information error'
-                        self.error.emit(errmsg)
-                else:
-                    errmsg = 'Connection error with code %i' %(r.status_code)
-                    self.error.emit(errmsg)
-            except:
-                self.error.emit('Unhandling error in load user info')
+            self.load_user(openid)
 
         self.onUser.emit(self.users[openid])
+
+
+    def dump_all_users(self):
+
+        for openid in self.openids:
+            if openid not in self.users:
+                t = threading.Thread(target = self.load_user, args = (openid,))
+                t.start()
+
+    def load_user(self, openid):
+        url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=%s&openid=%s' %(self.access_token, openid)
+        msg = 'loading user %s' %(openid)
+        self.info.emit(msg)
+        try:
+            r = requests.get(url)
+            if r.status_code == 200:
+                jobj = json.loads(r.content)
+                if jobj.has_key('openid'):
+                    self.users[openid] = User(jobj)
+                    self.progress.emit(len(self.users), len(self.openids))
+                else:
+                    errmsg = 'User information error'
+                    self.error.emit(errmsg)
+            else:
+                errmsg = 'Connection error with code %i' %(r.status_code)
+                self.error.emit(errmsg)
+        except:
+            self.error.emit('Unhandling error in load user info')
 
 
