@@ -19,7 +19,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lineEdit_appid.setText('wxaafc0692eca7f8d6')
         self.lineEdit_secret.setText('077b4e1bed2b773c1014efa4512cd652')
         self.progressBar.setValue(0)
+
         self.pushButton_get_openids.setEnabled(False)
+        self.pushButton_dump_all_user.setEnabled(False)
+        self.pushButton_gender.setEnabled(False)
+        self.pushButton_language.setEnabled(False)
+        self.pushButton_city.setEnabled(False)
+        self.pushButton_province.setEnabled(False)
+        self.pushButton_country.setEnabled(False)
         
         self.pushButton_connect.clicked.connect(self.onConnect)
         self.pushButton_get_openids.clicked.connect(self.onGetOpenids)
@@ -63,6 +70,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.listWidget.addItems(self.manager.openids)
         self.progressBar.setValue(0)
         self.lcdNumber_totalUsers.display(len(self.manager.openids))
+        self.pushButton_dump_all_user.setEnabled(True)
 
 
     def onOpenidFocus(self, target):

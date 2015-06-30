@@ -86,6 +86,7 @@ class UserManager(QObject):
 
     def dump_all_users(self):
 
+        self.info.emit('Dumping all users information')
         for openid in self.openids:
             if openid not in self.users:
                 t = threading.Thread(target = self.load_user, args = (openid,))
