@@ -6,7 +6,7 @@ WeChat public service analyzer prototype
 Jin Qin: ustc.bigtailwolf@gmail.com
 
 <H1>Developing</H1>
-Python2.7
-PyQt4
-requests
+<p>Python2.7</p>
+<p>PyQt4</p>
+<p>requests</p>
 
