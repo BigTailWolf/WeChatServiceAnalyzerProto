@@ -13,12 +13,12 @@ def displayPie(keys, values, title_msg):
 
     percent = 100.0 * y / total if total else [0,] * len(y)
 
-    matplotlib.rc('font', **{'sans-serif' : 'Arial', 'family' : 'sans-serif'})
+    #matplotlib.rc('font', **{'sans-serif' : 'Arial', 'family' : 'sans-serif'})
 
     patches, texts, pct = plt.pie(y, labels = x, autopct = u'%1.2f%%', shadow = True, startangle = 180, radius = 0.8)
     xlabels = [u'{0} - {1:1.2f} %'.format(i,j) for i,j in zip(x, percent)]
 
-    plt.title('Just a figure', bbox={'facecolor':'0.8', 'pad':5})
+    plt.title(title_msg, bbox={'facecolor':'0.8', 'pad':5})
     plt.legend(patches, xlabels, loc='center left', bbox_to_anchor=(-0.1, 0.2),
                fontsize=8)
 
