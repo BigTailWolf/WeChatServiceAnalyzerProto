@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Tue Jun 30 16:31:10 2015
-#      by: PyQt4 UI code generator 4.10.3
+# Created: Wed Jul  1 20:07:14 2015
+#      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -26,8 +26,8 @@ except AttributeError:
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(782, 565)
-        MainWindow.setMinimumSize(QtCore.QSize(650, 565))
+        MainWindow.resize(850, 580)
+        MainWindow.setMinimumSize(QtCore.QSize(850, 580))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.gridLayout = QtGui.QGridLayout(self.centralwidget)

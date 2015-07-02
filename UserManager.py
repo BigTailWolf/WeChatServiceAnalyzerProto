@@ -4,6 +4,7 @@ import json
 import requests
 import threading
 from PyQt4.QtCore import QObject, pyqtSignal
+from Statistic    import Statistic
 
 class User(object):
 
@@ -34,6 +35,7 @@ class UserManager(QObject):
     def __init__(self):
         QObject.__init__(self)
         self.reset()
+        self.statistic = Statistic(self.users)
 
     def reset(self):
         self.users = {}
@@ -87,10 +89,16 @@ class UserManager(QObject):
     def dump_all_users(self):
 
         self.info.emit('Dumping all users information')
+        t = threading.Thread(target = self.dump_execute)
+        t.start()
+
+
+    def dump_execute(self):
         for openid in self.openids:
             if openid not in self.users:
                 t = threading.Thread(target = self.load_user, args = (openid,))
                 t.start()
+
 
     def load_user(self, openid):
         url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=%s&openid=%s' %(self.access_token, openid)
@@ -112,4 +120,22 @@ class UserManager(QObject):
         except:
             self.error.emit('Unhandling error in load user info')
 
+
+    def do_statistic(self):
+        self.statistic.doStatistic()
+
+    def show_stat_sex(self):
+        self.statistic.showPieChart('sex')
+
+    def show_stat_language(self):
+        self.statistic.showPieChart('language')
+
+    def show_stat_city(self):
+        self.statistic.showPieChart('city')
+
+    def show_stat_province(self):
+        self.statistic.showPieChart('province')
+
+    def show_stat_country(self):
+        self.statistic.showPieChart('country')
 

@@ -22,12 +22,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.pushButton_get_openids.setEnabled(False)
         self.pushButton_dump_all_user.setEnabled(False)
-        self.pushButton_gender.setEnabled(False)
-        self.pushButton_language.setEnabled(False)
-        self.pushButton_city.setEnabled(False)
-        self.pushButton_province.setEnabled(False)
-        self.pushButton_country.setEnabled(False)
-        
+       
         self.pushButton_connect.clicked.connect(self.onConnect)
         self.pushButton_get_openids.clicked.connect(self.onGetOpenids)
         self.listWidget.currentItemChanged.connect(self.onOpenidFocus)
@@ -38,7 +33,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.manager.onUser.connect(self.onUserInfo)
         self.manager.progress.connect(self.onProgressUpdate)
         self.pushButton_dump_all_user.clicked.connect(self.manager.dump_all_users)
-
+        self.pushButton_statistics.clicked.connect(self.manager.do_statistic)
+        self.pushButton_gender.clicked.connect(self.manager.show_stat_sex)
+        self.pushButton_language.clicked.connect(self.manager.show_stat_language)
+        self.pushButton_city.clicked.connect(self.manager.show_stat_city)
+        self.pushButton_province.clicked.connect(self.manager.show_stat_province)
+        self.pushButton_country.clicked.connect(self.manager.show_stat_country)
 
     def onInfo(self, msg):
         self.statusBar().showMessage(msg)
